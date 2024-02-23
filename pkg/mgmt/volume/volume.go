@@ -259,9 +259,9 @@ func (c *VolController) getVgPriorityList(vol *apis.LVMVolume) ([]apis.VolumeGro
 		filteredVgs = append(filteredVgs, vg)
 	}
 
-	// prioritize the volume group having less free space available.
+	// prioritize the volume group having most free space available.
 	sort.SliceStable(filteredVgs, func(i, j int) bool {
-		return filteredVgs[i].Free.Cmp(filteredVgs[j].Free) < 0
+		return filteredVgs[i].Free.Cmp(filteredVgs[j].Free) > 0
 	})
 	return filteredVgs, nil
 }
